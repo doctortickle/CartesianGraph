@@ -3,34 +3,34 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Graph<T> {
+public class Graph {
     
-    final private HashMap<T, Set<T>> adjacencyMap;
+    final private HashMap<Vertex, Set<Vertex>> adjacencyMap;
     
     public Graph() {
         this.adjacencyMap = new HashMap<>();
     }
     
-    public void addVertex(T vertex) {
+    public void addVertex(Vertex vertex) {
         if (this.adjacencyMap.containsKey(vertex)) {
             throw new IllegalArgumentException("Node already exists.");
         }
-        this.adjacencyMap.put(vertex, new HashSet<T>());
+        this.adjacencyMap.put(vertex, new HashSet<Vertex>());
     }
 
-    public void removeVertex(T vertex) {
+    public void removeVertex(Vertex vertex) {
         if (!this.adjacencyMap.containsKey(vertex)) {
             throw new IllegalArgumentException("Vertex doesn't exist.");
         }
         
         this.adjacencyMap.remove(vertex);
         
-        for (T u: this.getAllVertices()) {
+        for (Vertex u: this.getAllVertices()) {
             this.adjacencyMap.get(u).remove(vertex);
         }
     }
     
-    public void connectVertices(T startVertex, T endVertex) {
+    public void connectVertices(Vertex startVertex, Vertex endVertex) {
         if (!this.adjacencyMap.containsKey(startVertex) || !this.adjacencyMap.containsKey(endVertex)) {
             throw new IllegalArgumentException();
         }
@@ -39,7 +39,7 @@ public class Graph<T> {
         this.adjacencyMap.get(endVertex).add(startVertex);
     }
     
-    public void disconnectVertices(T startVertex, T endVertex) {
+    public void disconnectVertices(Vertex startVertex, Vertex endVertex) {
         if (!this.adjacencyMap.containsKey(startVertex) || !this.adjacencyMap.containsKey(endVertex)) {
             throw new IllegalArgumentException();
         }
@@ -48,19 +48,19 @@ public class Graph<T> {
         this.adjacencyMap.get(endVertex).remove(startVertex);
     }
     
-    public boolean containsVertex(T vertex) {
+    public boolean containsVertex(Vertex vertex) {
     	return this.adjacencyMap.containsKey(vertex);
     }
     
-    public boolean isAdjacent(T vertex, T checkVertex) {
+    public boolean isAdjacent(Vertex vertex, Vertex checkVertex) {
         return this.adjacencyMap.get(vertex).contains(checkVertex);
     }
     
-    public Iterable<T> getAdjacentVertices(T vertex) {
+    public Iterable<Vertex> getAdjacentVertices(Vertex vertex) {
         return this.adjacencyMap.get(vertex);
     }
     
-    public Iterable<T> getAllVertices() {
+    public Iterable<Vertex> getAllVertices() {
         return this.adjacencyMap.keySet();
     }
 }

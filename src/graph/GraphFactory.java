@@ -5,6 +5,7 @@ public class GraphFactory {
 	private int x;
 	private int y;
 	private EdgeMap edgeMap;
+	private Graph graph;
 
 	public GraphFactory(int x, int y, EdgeMap edgeMap) {
 		this.x = x;
@@ -12,14 +13,24 @@ public class GraphFactory {
 		this.edgeMap = edgeMap;
 	}
 	
-	public Graph<Vertex> buildGraph() {
-		Graph<Vertex> graph = new Graph<Vertex>();
+	public Graph buildGraph() {
+		graph = new Graph();
 		buildAllVertices(graph);
 		connectVertices(graph);
 		return graph;
 	}
 	
-	private void buildAllVertices(Graph<Vertex> graph) {
+	private Vertex getVertex(int x, int y) {
+		Vertex testVertex = new Vertex(x, y, edgeMap);
+		for(Vertex vertex : graph.getAllVertices()) {
+			if(testVertex.equals(vertex)) {
+				return vertex;
+			}
+		}
+		return null;
+	}
+	
+	private void buildAllVertices(Graph graph) {
 
 		for(int i = -x; i <= x; i ++) {
 			for(int j = -y; j <= y; j++) {
@@ -28,12 +39,12 @@ public class GraphFactory {
 		}
 	}
 	
-	private void connectVertices(Graph<Vertex> graph) {
+	private void connectVertices(Graph graph) {
 				
 		for(Vertex i : graph.getAllVertices()) {
 			
 			for(int[] dir : i.getDirs()) {
-				Vertex j = new Vertex(i.getX() + dir[0], i.getY() + dir[1], edgeMap);
+				Vertex j = getVertex(i.getX() + dir[0], i.getY() + dir[1]);
 				if(validate(graph, j)) {
 					graph.connectVertices(i, j);
 				}
@@ -46,8 +57,8 @@ public class GraphFactory {
 		}
 	}
 	
-    private boolean validate(Graph<Vertex> graph, Vertex vertex) {
-		if( graph.containsVertex(vertex))
+    private boolean validate(Graph graph, Vertex vertex) {
+		if(vertex != null && graph.containsVertex(vertex))
 			return true;
 		return false;
 	}
