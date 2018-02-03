@@ -1,5 +1,7 @@
 package graph;
 
+import java.util.ArrayList;
+
 public class GraphFactory {
 	
 	private int x;
@@ -11,26 +13,25 @@ public class GraphFactory {
 		this.x = x;
 		this.y = y;
 		this.edgeMap = edgeMap;
+		this.graph = new Graph();
 	}
 	
 	public Graph buildGraph() {
-		graph = new Graph();
-		buildAllVertices(graph);
-		connectVertices(graph);
+		buildAllVertices();
+		connectVertices();
 		return graph;
 	}
 	
 	private Vertex getVertex(int x, int y) {
-		Vertex testVertex = new Vertex(x, y, edgeMap);
 		for(Vertex vertex : graph.getAllVertices()) {
-			if(testVertex.equals(vertex)) {
+			if(vertex.getX() == x && vertex.getY() == y) {
 				return vertex;
 			}
 		}
 		return null;
 	}
 	
-	private void buildAllVertices(Graph graph) {
+	private void buildAllVertices() {
 
 		for(int i = -x; i <= x; i ++) {
 			for(int j = -y; j <= y; j++) {
@@ -39,7 +40,9 @@ public class GraphFactory {
 		}
 	}
 	
-	private void connectVertices(Graph graph) {
+	private void connectVertices() {
+		
+		ArrayList<Vertex> vertexBuffer = new ArrayList<>();
 				
 		for(Vertex i : graph.getAllVertices()) {
 			
@@ -47,13 +50,10 @@ public class GraphFactory {
 				Vertex j = getVertex(i.getX() + dir[0], i.getY() + dir[1]);
 				if(validate(graph, j)) {
 					graph.connectVertices(i, j);
+					vertexBuffer.add(j);
 				}
 			}
-			System.out.println(i.toString() + "is connected to: ");
-			for(Vertex j : graph.getAdjacentVertices(i)) {
-				System.out.print(j.toString());
-			}
-			System.out.println();
+			i.setConnectedVertices(vertexBuffer);
 		}
 	}
 	

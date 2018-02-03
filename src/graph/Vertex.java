@@ -1,11 +1,14 @@
 package graph;
 
+import java.util.ArrayList;
+
 public class Vertex {
 
 	private int x;
 	private int y;
 	private EdgeMap edgeMap;
 	private Object guiComponent;
+	private ArrayList<Vertex> connectedVertices;
 
 	public Vertex(int x, int y, EdgeMap edgeMap) {
 		this.x = x;
@@ -31,6 +34,14 @@ public class Vertex {
 		
 		return edgeMap.getDirs(x, y);
 
+	}
+	
+	public ArrayList<Vertex> setConnectedVertices(ArrayList<Vertex> connectedVertices) {
+		return this.connectedVertices = connectedVertices;
+	}
+	
+	public ArrayList<Vertex> getConnectedVertices() {
+		return connectedVertices;
 	}
 	
 	public void setGUIComponent(Object obj) {
@@ -70,7 +81,6 @@ public class Vertex {
 			return false;
 		return true;
 	}
-	
 	
 
 }
