@@ -59,6 +59,12 @@ public class GraphFactory {
     	return this.graph; // the graph created by the GraphFactory.
     	
     }
+    
+    public EdgeMap getEdgeMap() {
+    	
+    	return this.edgeMap;
+    	
+    }
 	
 	/**
 	 * Returns a supplied vertex from a graph, if it exists.

@@ -8,7 +8,7 @@ import java.util.Set;
  * in a Cartesian coordinate system, such as (0,0,0) and (0,1,0) are represented as adjacent in a graph by an 
  * unweighted undirected edge stored in an adjacency list. An adjacency list was chosen over an adjacency matrix
  * due to the lower time complexity when retrieving neighbors ( O(neighbors) vs. O(V) ). This class also contains 
- * the functionality to connectany two vertices that would traditionally not be considered adjacent in a Cartesian 
+ * the functionality to connect any two vertices that would traditionally not be considered adjacent in a Cartesian 
  * coordinate system, such as (0,0,0) and (10,10,10). This allows developers using a 2D or 3D Cartesian coordinate 
  * system to allow two vertices to be connected that otherwise would not normally be, such as including "worm-hole"
  * travel in a video game set in space or for the purposes of allowing movement off one end of the grid 
@@ -146,7 +146,7 @@ public class Graph {
      * Returns an iterable list of vertices adjacent to the supplied vertex.
      * @param vertex - the vertex for which all adjacent vertices will be returned.
      * @return Iterable<Vertex> of all adjacent vertices to the supplied vertex.
-     * @see Iterable, Vertex
+     * @see Vertex
      */
     public Iterable< Vertex > getAdjacentVertices( Vertex vertex ) {
     	
@@ -157,7 +157,7 @@ public class Graph {
     /**
      * Returns an iterable list of vertices in this graph.
      * @return Iterable<Vertex> of all vertices in this graph.
-     * @see Iterable, Vertex
+     * @see Vertex
      */
     public Iterable< Vertex > getAllVertices() {
     	

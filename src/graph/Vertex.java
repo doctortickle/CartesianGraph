@@ -55,10 +55,18 @@ public class Vertex {
 	
 	}
 	
+	/**
+	 * Allows setting reference to a GUI component (such as a JavaFX Rectangle) for the purposes of illustrating this vertex.
+	 * @param obj - Object to be set as a GUI component.
+	 */
 	public void setGUIComponent(Object obj) {
 		this.guiComponent = obj;
 	}
 	
+	/**
+	 * Allows retrieving reference to a GUI component (such as a JavaFX Rectangle) for the purposes of illustrating this vertex.
+	 * @return Object set as a GUI component.
+	 */
 	public Object getGUIComponenet() {
 		return guiComponent;
 	}
