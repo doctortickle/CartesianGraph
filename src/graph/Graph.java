@@ -119,7 +119,7 @@ public class Graph {
     /**
      * Determines if a vertex exists in this graph.
      * @param vertex - vertex to be checked for existence.
-     * @return true if vertex exists in this graph or false if it does not.
+     * @return <tt>true</tt> if vertex exists in this graph or <tt>false</tt> if it does not.
      * @see Vertex
      */
     public boolean containsVertex( Vertex vertex ) {
@@ -132,7 +132,7 @@ public class Graph {
      * Determines if a vertex is adjacent to another vertex in this graph.
      * @param a - vertex to be checked for adjacency.
      * @param b - vertex to be checked for adjacency.
-     * @return true if vertices a and b are adjacent to one another in this graph or false if they are not.
+     * @return <tt>true</tt> if vertices a and b are adjacent to one another in this graph or <tt>false</tt> if they are not.
      * @see Vertex
      */
     public boolean isAdjacent( Vertex a, Vertex b ) {
