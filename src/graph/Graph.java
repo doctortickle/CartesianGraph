@@ -5,11 +5,12 @@ import java.util.Set;
 
 /**
  * Graph is an object that stores a Cartesian coordinate system as a vertex-edge graph. Adjacent coordinates
- * in a Cartesian coordinate system, such as (0,0,0) and (0,1,0) are represented as adjacent in a graph by a 
- * connecting edge with an edge weight of 1. This class also contains the functionality to connect
- * any two vertices that would traditionally not be considered adjacent in a Cartesian coordinate system, such as
- * (0,0,0) and (10,10,10). This allows developers using a 2D or 3D Cartesian coordinate system to allow two
- * vertices to be connected that otherwise would not normally be, such as including "worm-hole"
+ * in a Cartesian coordinate system, such as (0,0,0) and (0,1,0) are represented as adjacent in a graph by an 
+ * unweighted undirected edge stored in an adjacency list. An adjacency list was chosen over an adjacency matrix
+ * due to the lower time complexity when retrieving neighbors ( O(neighbors) vs. O(V) ). This class also contains 
+ * the functionality to connectany two vertices that would traditionally not be considered adjacent in a Cartesian 
+ * coordinate system, such as (0,0,0) and (10,10,10). This allows developers using a 2D or 3D Cartesian coordinate 
+ * system to allow two vertices to be connected that otherwise would not normally be, such as including "worm-hole"
  * travel in a video game set in space or for the purposes of allowing movement off one end of the grid 
  * to wrap around to the other side, like in Pac-Man. This class also contains the functionality to
  * remove edges between vertices.  This allows developers using a 2D or 3D Cartesian coordinate system to 
@@ -21,7 +22,7 @@ import java.util.Set;
  */
 public class Graph {
     
-    final private HashMap< Vertex, Set< Vertex > > adjacencyMap;
+    final private HashMap< Vertex, HashSet< Vertex > > adjacencyMap;
     
     /**
      * Constructor. Creates a new vertex-edge graph representing a Cartesian coordinate system.
