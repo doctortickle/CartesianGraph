@@ -1,6 +1,6 @@
 # Cartesian Graph
 
-Cartesian Graph is an undirected and unweighted graph representation of a Cartesian coordinate system. 
+`CartesianGraph` is an undirected and unweighted graph representation of a Cartesian coordinate system. 
 
 ## Using in your own project
 
@@ -9,7 +9,7 @@ path or export the project as a runnable .jar and add the .jar to your build pat
 
 ## Vertex
 
-This class represents Cartesian coordinates (x, y, and z). If implementing a 2D coordinate system, set `z` to 0.  
+This class represents Cartesian coordinates `(x, y, z)`. If implementing a 2D coordinate system, set `z` to 0.  
 
 ## EdgeMap
 
@@ -19,11 +19,13 @@ the unit vectors:
 
 ```(1, 0, 0), (0, 1, 0), (-1, 0, 0), and (0, -1, 0)```
 
-You may create your own definitions of adjacency by implementing EdgeMap. For example, to create a 3D cube-based Cartesian grid (diagonal
+You may create your own definitions of adjacency by implementing `EdgeMap`. For example, to create a 3D cube-based Cartesian grid (diagonal
 not considered adjacent), you would store the unit vectors:
 
 ```(1, 0, 0), (0, 1, 0), (-1, 0, 0), (0, -1, 0)```
+
 ```(1, 0, 1), (0, 1, 1), (-1, 0, 1), (0, -1, 1)```
+
 ```(1, 0, -1), (0, 1, -1), (-1, 0, -1), (0, -1, -1)```
 
 ## Authors
