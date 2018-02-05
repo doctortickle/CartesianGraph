@@ -9,6 +9,7 @@ package graph;
  * @version 1.0
  * @see Graph, Vertex, EdgeMap
  */
+
 public class GraphFactory {
 	
 	private int x;
@@ -81,7 +82,7 @@ public class GraphFactory {
 		
 		return null; // return null if the vertex does not exist.
 	}
-	
+
 	/**
 	 * Builds a number of vertices between -x and x, between -y and y, and between -z and z. 
 	 */
@@ -121,7 +122,7 @@ public class GraphFactory {
 				}
 				
 			}
-			
+
 		}
 		
 	}
@@ -141,7 +142,6 @@ public class GraphFactory {
 				
 		return false; // return false if the vertex is either null or not contained in the graph.
 		
-	}
-	
+	}	
     
 }
