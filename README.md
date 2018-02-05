@@ -11,7 +11,7 @@ path or export the project as a runnable .jar and add the .jar to your build pat
 
 This class represents Cartesian coordinates (x, y, and z). If implementing a 2D coordinate system, set `z` to 0.  
 
-# EdgeMap
+## EdgeMap
 
 This interface is implemented by classes that define which coordinates in a Cartesian coordinate system are adjacent. For example,
 `Square2D` defines vertices that would be adjacent in a 2D square-based Cartesian grid (diagonal not considered adjacent) by storing 
