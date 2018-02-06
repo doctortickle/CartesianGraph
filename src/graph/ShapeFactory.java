@@ -7,7 +7,7 @@ package graph;
  * @version 1.0
  * @see Vertex
  */
-public interface EdgeMap {
+public interface ShapeFactory  {
 	
 	/**
 	 * Returns an array of integer arrays that represent unit vectors for vertices considered adjacent to
@@ -17,4 +17,5 @@ public interface EdgeMap {
 	 */
 	public int[][] getDirs( Vertex vertex );
 	
+	public void buildShape( Vertex vertex, int radius );	
 }

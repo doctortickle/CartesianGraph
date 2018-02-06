@@ -1,5 +1,7 @@
 package graph;
 
+import java.awt.Toolkit;
+
 /**
  * GraphFactory produces a non-directional edge-vertex graph in which each vertex is 
  * connected to the vertices specified by the provided EdgeMap template and each vertex is
@@ -15,7 +17,8 @@ public class GraphFactory {
 	private int x;
 	private int y;
 	private int z;
-	private EdgeMap edgeMap;
+	private int radius;
+	private ShapeFactory shapeFactory;
 	private Graph graph;
 	
 	/**
@@ -26,15 +29,16 @@ public class GraphFactory {
 	 * with a Y-axis spanning from -20 to 20, including 0.
 	 * @param z - the z-limit of the Cartesian coordinate grid. For example, 20 will create a grid
 	 * with a z-axis spanning from -20 to 20, including 0.
-	 * @param edgeMap - the EdgeMap template that instructs the GraphFactory on how to connect each
+	 * @param shapeFactory - the EdgeMap template that instructs the GraphFactory on how to connect each
 	 * vertex to surrounding vertices.
 	 */
-	public GraphFactory( int x, int y, int z, EdgeMap edgeMap ) {
+	public GraphFactory( int x, int y, int z, ShapeFactory shapeFactory ) {
 		
 		this.x = x;
 		this.y = y;
 		this.z = z;
-		this.edgeMap = edgeMap;
+		this.shapeFactory = shapeFactory;
+		this.radius = ( int ) Math.floor( ( Toolkit.getDefaultToolkit().getScreenSize().width / x ) / 6 );
 		graph = new Graph();
 		
 	}
@@ -46,7 +50,7 @@ public class GraphFactory {
 		
 		buildAllVertices(); // 1) Build all the vertices individually.
 		connectVertices(); // 2) Connect all the vertices based on the EdgeMap provided.
-		 
+		createShapes();
 	}
 	
 	/**
@@ -57,12 +61,6 @@ public class GraphFactory {
     public Graph getGraph() {
     	
     	return this.graph; // the graph created by the GraphFactory.
-    	
-    }
-    
-    public EdgeMap getEdgeMap() {
-    	
-    	return this.edgeMap;
     	
     }
 	
@@ -100,7 +98,7 @@ public class GraphFactory {
 				
 				for( int k = -z; k <= z; k++ ) { // 2) for each int j between -z and z;
 					
-					graph.addVertex( new Vertex( i,j,z ) ); // 3) construct a new vertex at coordinate i, j, k.
+					graph.addVertex( new Vertex( i, j, k ) ); // 3) construct a new vertex at coordinate i, j, k.
 					
 				}	
 				
@@ -117,7 +115,7 @@ public class GraphFactory {
 				
 		for( Vertex i : graph.getAllVertices() ) { // 1) for each vertex, i, in the graph;
 			
-			for( int[] dir : edgeMap.getDirs( i ) ) { // 2) for each edge in the supplied EdgeMap;
+			for( int[] dir : shapeFactory.getDirs( i ) ) { // 2) for each edge in the supplied EdgeMap;
 				
 				Vertex j = getVertex( i.getX() + dir[ 0 ], i.getY() + dir[ 1 ], i.getZ() + dir[2] ); // 3) retrieve the vertex, j, at the supplied coordinates;
 				
@@ -148,6 +146,16 @@ public class GraphFactory {
 				
 		return false; // return false if the vertex is either null or not contained in the graph.
 		
-	}	
+	}
+    
+    private void createShapes() {
+    	
+		for( Vertex i : graph.getAllVertices() ) { // 1) for each vertex, i, in the graph;
+			
+			shapeFactory.buildShape(i, radius); // 2) build the shape.
+
+		}
+    	
+    }
     
 }

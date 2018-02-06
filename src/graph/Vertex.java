@@ -1,5 +1,9 @@
 package graph;
 
+import javafx.scene.Group;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Polygon;
+
 /**
  * Vertex is a class that represents vertices in a edge-vertex graph meant to store a Cartesian coordinate system.
  * A vertex may represent a coordinate in both 2D and 3D Cartesian coordinate systems. For a 2D plane, set the
@@ -7,12 +11,14 @@ package graph;
  * @author Dylan Russell
  * @version 1.0
  */
-public class Vertex {
+public class Vertex extends Polygon {
 
 	private int x;
 	private int y;
 	private int z;
-	private Object guiComponent;
+	private Color defaultColor;
+	private Group connections;
+	
 	
 	/**
 	 * Constructor. x, y, and z are integers representing the x-, y-, and z- coordinates in a Cartesian coordinate system.
@@ -25,7 +31,16 @@ public class Vertex {
 		this.x = x;
 		this.y = y;
 		this.z = z;
+		initVertex();
+		
+	}
 	
+	private void initVertex() {
+		
+		setDefaultColor( Color.TRANSPARENT );
+		setStroke( Color.BLACK );
+		setOpacity( 0.5 );
+		
 	}
 		
 	/**
@@ -55,20 +70,29 @@ public class Vertex {
 	
 	}
 	
-	/**
-	 * Allows setting reference to a GUI component (such as a JavaFX Rectangle) for the purposes of illustrating this vertex.
-	 * @param obj - Object to be set as a GUI component.
-	 */
-	public void setGUIComponent(Object obj) {
-		this.guiComponent = obj;
+	public void setDefaultColor( Color color ) {
+		
+		defaultColor = color;
+		setFill( defaultColor );
+		
 	}
 	
-	/**
-	 * Allows retrieving reference to a GUI component (such as a JavaFX Rectangle) for the purposes of illustrating this vertex.
-	 * @return Object set as a GUI component.
-	 */
-	public Object getGUIComponenet() {
-		return guiComponent;
+	public Color getDefaultColor() {
+		
+		return defaultColor;
+		
+	}
+	
+	public void addConnections( Group connections ) {
+		
+		this.connections = connections;
+		
+	}
+	
+	public Group getConnections() {
+		
+		return connections;
+		
 	}
 	
 	@Override
