@@ -17,5 +17,11 @@ public interface ShapeFactory  {
 	 */
 	public int[][] getDirs( Vertex vertex );
 	
+	/**
+	 * Contains the mathematical data for calculating the points of the Polygon visually representing the vertex
+	 * in a grid.
+	 * @param vertex - vertex to be visually represented.
+	 * @param radius - the size of the visual vertex representation.
+	 */
 	public void buildShape( Vertex vertex, int radius );	
 }

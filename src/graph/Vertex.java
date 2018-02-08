@@ -2,6 +2,7 @@ package graph;
 
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Polygon;
 
 /**
@@ -16,7 +17,8 @@ public class Vertex extends Polygon {
 	private int x;
 	private int y;
 	private int z;
-	private Color defaultColor;
+	private int radius;
+	private Paint defaultColor;
 	private Group connections;
 	
 	
@@ -25,21 +27,14 @@ public class Vertex extends Polygon {
 	 * @param x - the x-coordinate in a Cartesian coordinate system.
 	 * @param y - the y-coordinate in a Cartesian coordinate system.
 	 * @param z - the z-coordinate in a Cartesian coordinate system.
+	 * @param radius - the radius of the circle into which this vertex is inscribed.
 	 */
-	public Vertex( int x, int y, int z ) {
+	public Vertex( int x, int y, int z, int radius ) {
 		
 		this.x = x;
 		this.y = y;
 		this.z = z;
-		initVertex();
-		
-	}
-	
-	private void initVertex() {
-		
-		setDefaultColor( Color.TRANSPARENT );
-		setStroke( Color.BLACK );
-		setOpacity( 0.5 );
+		this.radius = radius;
 		
 	}
 		
@@ -70,25 +65,51 @@ public class Vertex extends Polygon {
 	
 	}
 	
-	public void setDefaultColor( Color color ) {
+	/**
+	 * @return the radius of the circle into which this vertex is inscribed.
+	 */
+	public int getRadius() {
+		
+		return radius;
+		
+	}
+	
+	/**
+	 * Sets the default color of this vertex.
+	 * @param color - color to be set as default.
+	 * @see Color
+	 */
+	public void setDefaultColor( Paint color ) {
 		
 		defaultColor = color;
 		setFill( defaultColor );
 		
 	}
 	
-	public Color getDefaultColor() {
+	/**
+	 * @return the default color of this vertex.
+	 * @see Color
+	 */
+	public Paint getDefaultColor() {
 		
 		return defaultColor;
 		
 	}
 	
+	/**
+	 * Adds all edges emanating from this vertex to other vertices as a Group of Connections.
+	 * @param connections
+	 * @see Connection, Group
+	 */
 	public void addConnections( Group connections ) {
 		
 		this.connections = connections;
 		
 	}
 	
+	/**
+	 * @return the Group of Connections representing all edges emanating from this vertex to other vertices.
+	 */
 	public Group getConnections() {
 		
 		return connections;

@@ -31,7 +31,7 @@ public class Hexagon2D implements ShapeFactory {
 		
 		for( int i = 1; i <= 6; i++ ) {
 			
-			double theta = i * (Math.PI/3);
+			double theta = i * ( Math.PI/3 );
 			double x = radius * Math.cos( theta );
 			double y = radius * Math.sin( theta );
 			vertex.getPoints().addAll( x,y );

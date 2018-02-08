@@ -1,7 +1,6 @@
 package graph;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Graph is an object that stores a Cartesian coordinate system as a vertex-edge graph. Adjacent coordinates
@@ -69,11 +68,7 @@ public class Graph {
         
         this.adjacencyMap.remove( vertex ); // remove this vertex from the HashMap.
         
-        for ( Vertex u: this.getAllVertices() ) { // for each vertex in this graph;
-        	
-            this.adjacencyMap.get( u ).remove( vertex ); // remove the edge with the supplied vertex.
-        
-        }
+        getAllVertices().forEach( u -> adjacencyMap.get( u ).remove( vertex ) ); // for each vertex in this graph remove the edge with the supplied vertex.
         
     }
     

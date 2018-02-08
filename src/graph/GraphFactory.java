@@ -1,15 +1,13 @@
 package graph;
 
-import java.awt.Toolkit;
-
 /**
  * GraphFactory produces a non-directional edge-vertex graph in which each vertex is 
- * connected to the vertices specified by the provided EdgeMap template and each vertex is
+ * connected to the vertices specified by the provided ShapeFactory template and each vertex is
  * represented by an x-, y-, and z-coordinate on a Cartesian grid. For a 2D grid, set z equal
  * to 0.
  * @author Dylan Russell
  * @version 1.0
- * @see Graph, Vertex, EdgeMap
+ * @see Graph, Vertex, ShapeFactory
  */
 
 public class GraphFactory {
@@ -29,7 +27,7 @@ public class GraphFactory {
 	 * with a Y-axis spanning from -20 to 20, including 0.
 	 * @param z - the z-limit of the Cartesian coordinate grid. For example, 20 will create a grid
 	 * with a z-axis spanning from -20 to 20, including 0.
-	 * @param shapeFactory - the EdgeMap template that instructs the GraphFactory on how to connect each
+	 * @param shapeFactory - the ShapeFactory template that instructs the GraphFactory on how to connect each
 	 * vertex to surrounding vertices.
 	 */
 	public GraphFactory( int x, int y, int z, ShapeFactory shapeFactory ) {
@@ -37,8 +35,8 @@ public class GraphFactory {
 		this.x = x;
 		this.y = y;
 		this.z = z;
-		this.shapeFactory = shapeFactory;
-		this.radius = ( int ) Math.floor( ( Toolkit.getDefaultToolkit().getScreenSize().width / x ) / 6 );
+		this.radius = ( 10 );
+		this.shapeFactory = shapeFactory;		
 		graph = new Graph();
 		
 	}
@@ -49,12 +47,12 @@ public class GraphFactory {
 	public void buildGraph() {	
 		
 		buildAllVertices(); // 1) Build all the vertices individually.
-		connectVertices(); // 2) Connect all the vertices based on the EdgeMap provided.
-		createShapes();
+		connectVertices(); // 2) Connect all the vertices based on the ShapeFactory provided.
+		createShapes(); // 3) Create a Polygon representation of every vertex according to the shape specified by ShapeFactory.
 	}
 	
 	/**
-	 * Returns the graph created by this CartesianGraphFactory.
+	 * Returns the graph created by this GraphFactory.
 	 * @return Graph representing a Cartesian grid.
 	 * @see Graph
 	 */
@@ -98,7 +96,7 @@ public class GraphFactory {
 				
 				for( int k = -z; k <= z; k++ ) { // 2) for each int j between -z and z;
 					
-					graph.addVertex( new Vertex( i, j, k ) ); // 3) construct a new vertex at coordinate i, j, k.
+					graph.addVertex( new Vertex( i, j, k, radius ) ); // 3) construct a new vertex at coordinate i, j, k.
 					
 				}	
 				
@@ -148,6 +146,9 @@ public class GraphFactory {
 		
 	}
     
+    /**
+     * Creates a visual representation of every vertex in this graph in order to be displayed as a grid.
+     */
     private void createShapes() {
     	
 		for( Vertex i : graph.getAllVertices() ) { // 1) for each vertex, i, in the graph;
